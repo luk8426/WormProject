@@ -400,7 +400,6 @@ bool isInUseByWorm(int new_headpos_y, int new_headpos_x) {
         
         else {
             i = (i+1) % theworm_maxindex;
-            if (theworm_wormpos_x[i] == UNUSED_POS_ELEM){break;}
         }
     } while (i != theworm_headindex && theworm_wormpos_x[i] != UNUSED_POS_ELEM);
     //Return what we found out
