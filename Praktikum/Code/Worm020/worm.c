@@ -272,7 +272,7 @@ void placeItem(int y, int x, chtype symbol, enum ColorPairs color_pair) {
     //  Store item on the display (symbol code)
     move(y, x);                         // Move cursor to (y,x)
     attron(COLOR_PAIR(color_pair));     // Start writing in selected color
-    addch('O');                      // Store symbol on the virtual display
+    addch(SYMBOL_WORM_INNER_ELEMENT);   // Store symbol on the virtual display
     attroff(COLOR_PAIR(color_pair));    // Stop writing in selected color
 }
 
@@ -341,7 +341,7 @@ void cleanWormTail(){
   int tailindex;
 
   //Compute tailindex
-  tailindex = (theworm_headindex+1) % theworm_maxindex;
+  tailindex = (theworm_headindex+1) % (theworm_maxindex+1);
 
   //Check if array element of tailindex is in use
   if (theworm_wormpos_y[tailindex] != UNUSED_POS_ELEM) {
@@ -379,7 +379,7 @@ void moveWorm(enum GameStates* agame_state) {
     //Check the status of *agame_state
     //Go on if nothing happened
     if (*agame_state == WORM_GAME_ONGOING) {
-      theworm_headindex = (theworm_headindex + 1) % theworm_maxindex;
+      theworm_headindex = (theworm_headindex + 1) % (theworm_maxindex +1);
       //Store new coordinates of head element in worm structure
       theworm_wormpos_y[theworm_headindex] = headpos_y;
       theworm_wormpos_x[theworm_headindex] = headpos_x;
@@ -399,7 +399,11 @@ bool isInUseByWorm(int new_headpos_y, int new_headpos_x) {
         }    
         
         else {
-            i = (i+1) % theworm_maxindex;
+          i = i-1;
+          if (i<0) {
+            i = theworm_maxindex;
+          }
+          //    i = (i+1) % theworm_maxindex + 1;
         }
     } while (i != theworm_headindex && theworm_wormpos_x[i] != UNUSED_POS_ELEM);
     //Return what we found out
