@@ -171,27 +171,27 @@ enum ResCodes doLevel() {
     switch (game_state){
       case WORM_GAME_ONGOING:
         if (getNumberOfFoodItems(&theboard) == 0){
-          showDialog("Sie haben die aktuelle Runde erfolgreich beendet!", " Bitte Taste drücken");
+          showDialog("Sie haben die aktuelle Runde erfolgreich beendet!", " Bitte Taste drücken\n");
         }
         else {
-          showDialog("Interner Fehler!", "Bitte Taste drücken");
+          showDialog("Interner Fehler!", "Bitte Taste drücken\n");
           res_code = RES_INTERNAL_ERROR;
         }
         break;
       case WORM_GAME_QUIT:
-        showDialog("Sie haben die aktuelle Runde abgebrochen!", " Bitte Taste drücken");
+        showDialog("Sie haben die aktuelle Runde abgebrochen!", " Bitte Taste drücken\n");
         break;
       case WORM_CRASH:
-        showDialog("Sie haben verloren," " weil Sie in eine Barriere gekrochen sind", " Bitte Taste drücken");
+        showDialog("Sie haben verloren," " weil Sie in eine Barriere gekrochen sind", " Bitte Taste drücken\n");
         break;
       case WORM_OUT_OF_BOUNDS:
-        showDialog("Sie haben das Spiel verloren," " weil Sie das Spielfeld verlassen haben", "Bitte Taste drücken");
+        showDialog("Sie haben das Spiel verloren," " weil Sie das Spielfeld verlassen haben", "Bitte Taste drücken\n");
         break;
       case WORM_CROSSING:
-        showDialog("Sie haben das Spiel verloren," " weil Sie einen Wurm gekreuzt haben", "Bitte Taste drücken");
+        showDialog("Sie haben das Spiel verloren," " weil Sie einen Wurm gekreuzt haben", "Bitte Taste drücken\n");
         break;
       default:
-        showDialog("Interner Fehler!", "Bitte Taste drücken");
+        showDialog("Interner Fehler!", "Bitte Taste drücken\n");
         res_code = RES_INTERNAL_ERROR;
     }
     // Normal exit point

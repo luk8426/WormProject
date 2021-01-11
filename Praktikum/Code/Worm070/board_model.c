@@ -62,7 +62,7 @@ void decrementNumberOfFoodItems(struct board* aboard){
   aboard->food_items = aboard->food_items -1;
 }
 
-// Initiazer
+// Initializer
 
 // Board
 enum ResCodes initializeBoard(struct board* aboard){

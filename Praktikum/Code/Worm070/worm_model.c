@@ -76,25 +76,31 @@ extern enum ResCodes initializeWorm(struct worm* aworm, int len_max, int len_cur
 // Show the worms's elements on the display
 // Simple version
 extern void showWorm(struct board* aboard, struct worm* aworm) {
-    // Due to our encoding we just need to show the head element
-    // All other elements are already displayed
+    // Place the head
     placeItem(aboard,
             aworm->wormpos[aworm->headindex].y,
             aworm->wormpos[aworm->headindex].x,
             BC_USED_BY_WORM,
             SYMBOL_WORM_HEAD_ELEMENT,
             aworm->wcolor);
-
-    int tailindex = (aworm->headindex + 1) % (aworm->cur_lastindex + 1);
+    // Place the Tail
+    int tailindex = (aworm->headindex+1) % (aworm->cur_lastindex+1);
+    if (aworm->wormpos[tailindex].y == -1){
+      tailindex = 0;
+    }
     placeItem(aboard,
             aworm->wormpos[tailindex].y,
             aworm->wormpos[tailindex].x,
             BC_USED_BY_WORM,
             SYMBOL_WORM_TAIL_ELEMENT,
             aworm->wcolor);
+    // Place the body
     for (int i = aworm->headindex -1; i != tailindex; i--){
       if (i<0){
-        i = aworm->cur_lastindex+1;
+        i = aworm->cur_lastindex+1; // continue will jump to i--
+        continue;
+      }
+      if (aworm->wormpos[i].y == UNUSED_POS_ELEM){
         continue;
       }
       placeItem(aboard,
